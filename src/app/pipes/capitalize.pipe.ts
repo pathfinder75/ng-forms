@@ -6,29 +6,21 @@ import { lchmod } from 'fs';
 })
 export class CapitalizePipe implements PipeTransform {
   transform(value: any): any {
-    // handle 2 firstnames separated by 1 hyphen (-)
-      let capitalizeTab = function(args){
-        // args = Array.prototype.slice.call(arguments);
-        // console.log(args);
-        return args.map(function(elem){
+    // handle 2 firstnames separated by 1 hyphen (-) or space
+    let virgule, espace, point, tiret;
+    [virgule, espace, point, tiret] = [","," ",".","-"];
+    let capitalizeTabFunc = function(args, separateur){
+      if(value.indexOf(separateur) > 0){
+        let tab = value.split(separateur);
+        let result = tab.map(function(elem){
           let fchar = elem.charAt(0);
           elem = fchar.toUpperCase() + elem.slice(1);
-          console.log(elem);
-          return elem;
         });
-      };
-      if(value.indexOf('-') > 0){
-        let tab = value.split('-');
-        let result = capitalizeTab(tab);
-        return result.join('-');
+        return result.join(separateur);
       } else {
         // get all white spaces that are not words
-        // var regexp = new RegExp(/\W/g);
-        let tab = value.split(' ');
-        let result = capitalizeTab(tab);
-        return result.join(' ');
+        return value.charAt(0) + value.slice(1);
       }
-
+    }
   }
-
 }

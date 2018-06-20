@@ -10,15 +10,11 @@ export class FormsComponent {
     values = "";
     constructor() {
     }
-    // avec (keyup)=onkey($event)
-    // onKey(event: KeyboardEvent){
-    //     this.values += (<HTMLInputElement>event.target).value + '|';
-    // }
-    // avec input tempate proerty #prenom et (keyup.enter)="onEnter()"
+
     onEnter(value: string){
         this.values = value;
     }
-    // avec blur
+
     update(value: string){
         this.values = value;
     }
