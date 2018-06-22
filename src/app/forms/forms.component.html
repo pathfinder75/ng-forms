@@ -1,11 +1,14 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head>
 <form class="form-group">
     <p>
         <label for="name">Nom:</label>
-        <input type="text" #nom class="form-control" [value]="" (blur)="update(nom.value)" (keyup.enter)="onEnter(nom.value)">
+        <input type="text" #nom name="nom" class="form-control" [value]="values" autocapitalize (keyup)="update(nom.value)">
     </p>
     <p>
         <label for="name">Prénom:</label>
-        <input type="text" #prenom class="form-control" [value]="" (blur)="update(prenom.value)" (keyup.enter)="onEnter(prenom.value)">
+        <input type="text" #prenom class="form-control" [value]="values" (blur)="update(prenom.value)" (keyup.enter)="update(prenom.value)">
     </p>
     <p> {{ prenom.value | capitalizepipe }} </p>
     <button class="btn-primary" (click)="reset()">Envoyer</button>

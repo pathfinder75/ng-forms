@@ -1,22 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FormsComponent } from "./forms/forms.component";
 import { CapitalizePipe } from "./pipes/capitalize.pipe";
+import { FormsModule }   from '@angular/forms';
+import { AutocapitalizeDirective } from './autocapitalize.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormsComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    AutocapitalizeDirective,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
