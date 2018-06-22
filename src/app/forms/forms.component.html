@@ -4,12 +4,12 @@
 <form class="form-group">
     <p>
         <label for="name">Nom:</label>
-        <input type="text" #nom name="nom" class="form-control" [value]="values" autocapitalize (keyup)="update(nom.value)">
+        <input type="text" #nom name="nom" class="form-control" [value]="values" autocapitalize (keyup)="onKeyup($event)">
     </p>
     <p>
         <label for="name">Prénom:</label>
-        <input type="text" #prenom class="form-control" [value]="values" (blur)="update(prenom.value)" (keyup.enter)="update(prenom.value)">
+        <input type="text" id="prenom" #prenom class="form-control" [value]="values">
     </p>
-    <p> {{ prenom.value | capitalizepipe }} </p>
-    <button class="btn-primary" (click)="reset()">Envoyer</button>
+    <p> {{ prenom.value}} </p>
+    <button class="btn-primary" (click)="reset()">Reset</button>
 </form>

@@ -12,37 +12,51 @@ export class FormsComponent {
     }
 
     update(value: string){
-        this.values = this.nomCompose(value);
+        this.values = this.nomPropre(value);
     }
     
 
     onKeyup(event: any){
         this.values = this.nomCompose((<HTMLInputElement>event.target).value);
-        console.log(this.values);
     }
 
-    reset(value = ""){
+    reset(){
         this.values = "";
     }
 
     // format text to Uppercase
-    nomPropre(text: string){
+    public nomPropre(text: string){
         return text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
       }
   
-    nomCompose(nom: any){
+    nomCompose(nom: string){
         let resultat = this.nomPropre(nom);
         let separateur = new RegExp(/[\u0020-\u002F]+/g);
-        // check if separateur is a white space or tiret "-"
-        resultat = resultat.replace(separateur, " ");
-        let indice = 0;
-        while(resultat.indexOf(" ", indice) > 0){
-          indice=resultat.indexOf(" ", indice);
-          resultat = resultat.substring(0, indice+1)+this.nomPropre(resultat.substring(indice+1));
-          indice++;
+        
+        if(separateur.test(resultat)){
+            let sep;
+            // let sep = resultat.match(separateur);
+            // for (var elem of sep){
+            //     console.log(elem);
+            //     this.separer(elem, resultat);
+            // }
+            console.log(resultat.match(separateur));
+            
+            resultat.indexOf(" ") > 0 ? sep = " " : resultat.indexOf("-") > 0 ? sep = "-" : resultat.indexOf(".") ? sep = "." : sep = "_";
+
+            console.log(sep);
+
+            let indice = 0;
+
+            while(resultat.indexOf(sep, indice) > 0){
+
+                indice=resultat.indexOf(sep, indice);
+                resultat = resultat.substring(0, indice+1)+this.nomPropre(resultat.substring(indice+1));
+                indice++;
+
+            }
         }
-  
         return resultat;
-      }
+    }
 
 }

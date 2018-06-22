@@ -8,7 +8,7 @@ export class AutocapitalizeDirective {
   values = "";
   constructor(el: ElementRef) { 
     el.nativeElement.style.backgroundColor = 'yellow';
-    el.nativeElement.value = 'default';
+    el.nativeElement.value = '';
   }
 
 // format text to Uppercase
