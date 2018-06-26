@@ -1,15 +1,20 @@
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta charset="UTF-8">
 </head>
 <form class="form-group">
+    <p id="test">Hello</p>
     <p>
         <label for="name">Nom:</label>
-        <input type="text" #nom name="nom" class="form-control" [value]="values" autocapitalize (keyup)="onKeyup($event)">
+        <input type="text" id="nom" #nom name="nom" class="form-control" autocapitalize="words">
     </p>
     <p>
         <label for="name">Prénom:</label>
-        <input type="text" id="prenom" #prenom class="form-control" [value]="values">
+        <input type="text" id="prenom" autocapitalize="characters" #prenom class="form-control">
     </p>
-    <p> {{ prenom.value}} </p>
+    <p>
+        <label for="name">Prénom:</label>
+        <input type="text" id="prenom" autocapitalize="on" #prenom class="form-control">
+    </p>
+    <p> {{ nom.value}} </p>
     <button class="btn-primary" (click)="reset()">Reset</button>
 </form>
