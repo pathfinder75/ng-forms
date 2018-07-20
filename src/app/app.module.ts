@@ -4,17 +4,22 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FormsComponent } from "./forms/forms.component";
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { CapitalizePipe } from "./pipes/capitalize.pipe";
+import { NameEditorComponent } from './name-editor/name-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormsComponent,
+    CapitalizePipe,
+    NameEditorComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

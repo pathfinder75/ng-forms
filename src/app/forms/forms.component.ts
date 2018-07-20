@@ -9,22 +9,22 @@ declare var $: any;
     styleUrls: ["./forms.component.css"]
 })
 export class FormsComponent {
-    values = "";
+    value = "";
     constructor() {
     }
 
     update(value: string){
-        this.values = value.toUpperCase();
-        // this.values = value;
+        this.value = value.toUpperCase();
     }
     
     // listen to the keyboard event of the user
     onKeyup(event: any){
-        // this.values = this.nomPropre((<HTMLInputElement>event.target).value);
+        this.value = this.nomCompose((<HTMLInputElement>event.target).value);
     }
 
-    reset(){
-        this.values = "";
+    reset(e: any){
+        e.preventDefault();
+        this.value = "";
     }
 
     // format any text to autocapitalize
@@ -58,47 +58,6 @@ export class FormsComponent {
     }
     ngOnInit() {
         // fonction qui récupère l'attribut autocapitalize de l'input field...
-        $('input').keyup(function(e){
-            console.log(upperCase('iii', 'tr'));
-        });
-        $('input').each(function(i){
-            if($(this).prop("autocapitalize") === "words"){
-                // add the  autocapitalize css class
-                $(this).addClass('autocapitalize');
-            }
-            if($(this).prop("autocapitalize") === "none" || $(this).prop("autocapitalize") === "off")
-            {
-                // leave it as it is as default : do nothing
-            }
-            if($(this).prop("autocapitalize") === "sentences" || $(this).prop("autocapitalize") === "on")
-            {
-                $(this).on("keyup", function(e) {
-                    var inp = String.fromCharCode(e.keyCode);
-                    if (/[a-zA-Z0-9-_ ]/.test(inp)) {
-                        var val = $(this).val().toLocaleUpperCase();
-                        var type = $(this).prop("autocapitalize");
-                        if ( type === "words" || type === "sentences" ) {
-                            var split_identifier = type === "words" ? " " : ". ";
-                            var split = val.split(split_identifier);
-                            $.each(split, function(i, v){
-                                if ( v.length ) {
-                                    split[i] = v.charAt(0).toUpperCase() + v.substring(1);
-                                }
-                            });
-                            val = split.join(split_identifier);
-                        } else if ( type === "characters" ) {
-                            val = upperCase(val);
-                        }
-                        $(this).val(val);
-                    }
-                });
-            }
-            if($(this).prop("autocapitalize") === "characters")
-            {
-                $(this).addClass('uppercase');
-            }
-            
-        });
     }
 
 }
