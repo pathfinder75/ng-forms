@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
-var upperCase = require('upper-case');
+import upperCase from 'upper-case'; //tslint:disable-line
 declare var $: any;
 
 @Component({
@@ -9,30 +9,34 @@ declare var $: any;
     styleUrls: ["./forms.component.css"]
 })
 export class FormsComponent {
-    value = "";
-    constructor() {
-    }
+    
+    value: string = "";
 
-    update(value: string){
-        this.value = value.toUpperCase();
+    inputElement: HTMLInputElement
+
+    constructor() {
+        
     }
     
-    // listen to the keyboard event of the user
+    update(value: string): any{
+        this.value = upperCase(value);
+    }
+
     onKeyup(event: any){
-        this.value = this.nomCompose((<HTMLInputElement>event.target).value);
+        
     }
 
     reset(e: any){
-        e.preventDefault();
         this.value = "";
     }
 
     // format any text to autocapitalize
+
     public nomPropre(text: string){
         return text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
       }
   
-    nomCompose(nom: string){
+    public nomCompose(nom: string){
         let resultat = this.nomPropre(nom);
         let separateur = new RegExp(/[\u0020-\u002F]+/g);
         

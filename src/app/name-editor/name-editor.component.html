@@ -1,4 +1,7 @@
-<label for="name">
-  Name: 
-  <input type="text" [formControl]="name">
-</label>
+<form [formGroup]="myGroup">
+  <input type="text" name="name" formControlName="name" appHighlight="highlightColor" />
+  <button type="submit">Show hero name</button>
+</form>
+<!-- Insert variable as the attribute's value, let textToBeCopied = 'http://facebook.com/' -->
+<button [text-copy]="textToBeCopied">Copy URL</button>
+<button [text-copy]="'https://www.google.com/'">Copy URL</button>

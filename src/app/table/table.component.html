@@ -1,0 +1,8 @@
+<table>
+    <thead>
+      <td *ngFor="let head of data.header">{{head}}</td>
+    </thead>
+  <tr *ngFor="let row of table.rows; let i = index">
+      <td let column of row>{{ column | dynamic:table.pipes[i] }}</td>
+  </tr>
+</table>

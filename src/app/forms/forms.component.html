@@ -5,20 +5,21 @@
         <p class="text-primary" id="test">Hello</p>
     <p>
         <label for="name">Nom:</label>
-        <input type="text" id="name" #nom="ngModel" name="name" class="form-control" [value]="value" (keyup)="onKeyup($event)" required minlength="4" forbiddenName="toto" [(ngModel)]="username">
+        <input type="text" id="name" name="name" #nom class="form-control" [value]="value" (keyup)="onKeyup($event)" required minlength="4" maxlength="22" forbiddenName="toto" >
     </p>
-    <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+    <!-- pour validation du form -->
+    <!-- <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
         <div *ngIf="nom.errors.required">veuillez entrer un nom.</div>
-    </div>
+    </div> -->
     <p>
         <label for="name">Prénom:</label>
-        <input type="text" id="prenom" autocapitalize="characters" #prenom class="form-control" [value]="value">
+        <input type="text" id="prenom" name="prenom" #prenom class="form-control" maxlength="22" (keyup.enter)="update(prenom.value)" >
     </p>
- 
-    <p>
-        <label for="name">Age:</label>
-        <input type="number" name="age" id="age" min="1" max="77">
-    </p>
-    <p> {{ 'test' | capitalizepipe }} </p>
+    <!-- pour validation du form -->
+    <!-- <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert alert-danger">
+        <div *ngIf="prenom.errors.required">veuillez entrer un prenom.</div>
+    </div> -->
+    
+    <p> {{ prenom.value }} </p>
     <button class="btn-primary" (click)="reset($event)">Reset</button>
 </form>
