@@ -7,11 +7,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MyVoterComponent implements OnInit {
   private _name: string = "";
+
   @Input()
   set name (name: string) {
-    this._name = '<no name set>';
+    this._name = (name && name.trim()) || '<no name set>';
   }
-  get name () {
+  get name (): string {
     return this._name;
   }
   @Output() onVoted = new EventEmitter<boolean>();
