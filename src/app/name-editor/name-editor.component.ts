@@ -11,7 +11,7 @@ export class NameEditorComponent implements OnInit {
   myGroup = new FormGroup({
     name: new FormControl()
   });
-  textToBeCopied = "Elo";
+  textToBeCopied = "hElo";
   constructor() { }
 
   ngOnInit() {

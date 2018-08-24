@@ -17,6 +17,8 @@ import { HeroChildComponent } from './hero/hero-child/hero-child.component';
 import { MyVoterComponent } from './vote-taker/my-voter/my-voter.component';
 import { VoteTakerComponent } from './vote-taker/vote-taker.component';
 import { TableComponent } from 'app/table/table.component';
+import { CountdownTimerComponent } from './countdown-timer/countdown-timer.component';
+import { CountdownParentComponent } from './countdown-parent/countdown-parent.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { TableComponent } from 'app/table/table.component';
     HeroChildComponent,
     MyVoterComponent,
     VoteTakerComponent,
-    TableComponent
+    TableComponent,
+    CountdownTimerComponent,
+    CountdownParentComponent
   ],
   imports: [
     BrowserModule,
