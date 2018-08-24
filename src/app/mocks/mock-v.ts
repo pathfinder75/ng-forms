@@ -1,0 +1,1 @@
+export const VOTERS = ['Mr Who', 'Ms. Universe', 'Mr. Bombastos'];
