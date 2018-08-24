@@ -2,4 +2,4 @@
     <input type="text" name="name" formControlName="name" />
     <button type="submit">Show hero name</button>
   </form>
-  <app-hero-child [master]="master"></app-hero-child>
+  <app-hero-child *ngFor="let hero of heroes" [id]="hero.id" [name]="hero.name" [master]="hero.master" (onClick)="update($event)"></app-hero-child>
