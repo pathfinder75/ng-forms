@@ -1,18 +1,29 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Hero } from "./hero-child/hero";
+import { HeroService } from "../services/hero.service";
 
 @Component({
   selector: 'app-hero',
-  template: `
-  <h2>Master {{master}} controls {{names.length}} patients</h2>
-  <app-hero-child *ngFor="let name of names" [name]="name" [masterN]="master" (onClick)="update($event)"></app-hero-child>`,
+  // template: `
+  // <h3>Master {{master}} controls {{names.length}} patients</h3>
+  // <app-hero-child *ngFor="let name of names" [name]="name" [masterN]="master" (onClick)="update($event)"></app-hero-child>`,
+  templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit {
   public formGroup = new FormGroup({
     name: new FormControl(),
   });
+  public names = ['Mr IQ', 'Poison ivy', ' ', 'Bombastos']
   private masterN: string = "Yves";
+  public heroes: Hero[];
+  getHeroes(): void {
+    this.heroService.getHeroes()
+    .subscribe((value) => {
+      this.heroes = value;
+    });
+  }
   @Input() set master(name){
     this.masterN = name;
   };
@@ -22,19 +33,21 @@ export class HeroComponent implements OnInit {
   update(response: boolean) {
     this.masterN = String(response);
   }
-  names = ['Mr IQ', ' ', 'Bombastos'];
   submit(event: any) {
-    // console.log(event);
-    // if(event.target){
-    //   this.masterName = event.target.value;
-    //   console.log(event.target.value);
-    // }
-    this.master = this.formGroup.value.name;
-    console.log(this.formGroup.value.name);
+    console.log(event);
+
+    try {
+      this.master = this.formGroup.value.name;
+    } catch (error) {
+      console.log(error);
+      
+    }
+    
   }
-  constructor() { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit() {
+    this.getHeroes();
   }
 
 }
