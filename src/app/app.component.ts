@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser/src/browser/title';
 import { HeroService } from 'app/services/hero.service';
 import { VoterService } from 'app/services/voter.service';
+import { MessageService } from 'app/services/message.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [HeroService, VoterService]
+  providers: [HeroService, VoterService, MessageService]
 })
 export class AppComponent {
   title1 = 'Patient Editor';

@@ -1,5 +1,0 @@
-<form (ngSubmit)="submit($event)" [formGroup]="formGroup" novalidate>
-    <input type="text" name="name" formControlName="name" />
-    <button type="submit">Show hero name</button>
-  </form>
-  <app-hero-child *ngFor="let hero of heroes" [id]="hero.id" [name]="hero.name" [master]="hero.master" (onClick)="update($event)"></app-hero-child>

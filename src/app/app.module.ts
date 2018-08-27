@@ -8,17 +8,20 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { CapitalizePipe } from "./pipes/capitalize.pipe";
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { LoginComponent } from './modules';
-import { HeroComponent } from './hero/hero.component';
+import { PatientComponent } from './patient/patient.component';
 import { DynamicPipe } from './pipes/dynamic.pipe';
 import { HighlightDirective } from './highlight.directive';
 import { AutocapitalizeDirective } from 'app/autocapitalize.directive';
 import { TextCopyDirective } from './copy-text.directive';
-import { HeroChildComponent } from './hero/hero-child/hero-child.component';
+import { HeroChildComponent } from './patient/hero-child/hero-child.component';
 import { MyVoterComponent } from './vote-taker/my-voter/my-voter.component';
 import { VoteTakerComponent } from './vote-taker/vote-taker.component';
 import { TableComponent } from 'app/table/table.component';
-import { CountdownTimerComponent } from './countdown-timer/countdown-timer.component';
+import { CountdownTimerComponent } from './countdown-parent/countdown-timer/countdown-timer.component';
 import { CountdownParentComponent } from './countdown-parent/countdown-parent.component';
+import { MessageComponent } from './message/message.component';
+import { MessageService } from 'app/services/message.service';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { CountdownParentComponent } from './countdown-parent/countdown-parent.co
     CapitalizePipe,
     NameEditorComponent,
     LoginComponent,
-    HeroComponent,
+    PatientComponent,
     DynamicPipe,
     HighlightDirective,
     AutocapitalizeDirective,
@@ -37,15 +40,17 @@ import { CountdownParentComponent } from './countdown-parent/countdown-parent.co
     VoteTakerComponent,
     TableComponent,
     CountdownTimerComponent,
-    CountdownParentComponent
+    CountdownParentComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

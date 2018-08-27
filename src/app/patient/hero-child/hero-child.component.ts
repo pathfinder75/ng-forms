@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { Hero } from "./hero";
+import { Patient } from "./patient";
 import { Output } from '@angular/core/src/metadata/directives';
 
 @Component({
@@ -13,7 +13,7 @@ import { Output } from '@angular/core/src/metadata/directives';
   styleUrls: ['./hero-child.component.css']
 })
 export class HeroChildComponent implements OnInit {
-  @Input() hero: Hero; // tslint: disable-line no-input-rename
+  @Input() hero: Patient; // tslint: disable-line no-input-rename
   // tslint:disable-next-line:no-input-rename
   @Input('master') master: string;
   @Input() id: number;
