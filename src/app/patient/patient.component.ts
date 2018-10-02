@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { FormsModule, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Patient } from "./hero-child/patient";
+import { Patient } from "./patient";
 import { HeroService } from "../services/hero.service";
 
 @Component({
@@ -9,7 +9,7 @@ import { HeroService } from "../services/hero.service";
   // <h3>Master {{master}} controls {{names.length}} patients</h3>
   // <app-hero-child *ngFor="let name of names" [name]="name" [masterN]="master" (onClick)="update($event)"></app-hero-child>`,
   templateUrl: './patient.component.html',
-  styleUrls: ['./hero.component.css']
+  styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
   public myForm: FormGroup;
@@ -41,9 +41,9 @@ export class PatientComponent implements OnInit {
     this.submitted = true;
     this.master = "Master";
       console.log(this.myForm.errors);
-      
+
     }
-    
+
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {

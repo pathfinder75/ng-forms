@@ -11,49 +11,55 @@ declare var $: any;
     styleUrls: ["./forms.component.css"]
 })
 export class FormsComponent implements OnInit, OnChanges {
+    public patientForm: FormGroup;
+    protected submitted: Boolean = false;
 
-    public firstname: FormControl;
-    public lastname: FormControl;
-    public password: FormControl;
-    public name: FormControl;
-    public age: FormControl;
-    public gender: FormControl;
-    public patient: Patient;
-    public myFormGroup: FormGroup;
-    protected submitted: Boolean;
-
-    constructor(private messageService: MessageService) { }
+    constructor(private fb: FormBuilder) { }
     ngOnInit() {
-        this.submitted = false;
-        this.myFormGroup = new FormGroup({
-            password: new FormControl('', Validators.required),
-            firstname: new FormControl('', Validators.required),
-            age: new FormControl('', Validators.required),
-            gender: new FormControl('', Validators.required),
-        });
-    }
+        // this.patientForm = new FormGroup({
+        //     name: new FormControl('', Validators.required),
+        //     firstname: new FormControl('', Validators.required),
+        //     adress:
+        //     age: new FormControl('', Validators.required),
+        //     gender: new FormControl('', Validators.required),
+        // });
+        this.patientForm = this.fb.group({
+          name: this.fb.group({
+            firstname: '', Validators.required,
+            lastname: '', Validators.required,
+          }), // the FormControl called "name"
+          age: '2',
+          address: 'buckingham palace'
 
-    onSubmit(event: any) {
-        event.preventDefault();
-        this.submitted = true;
-        console.log(this.myFormGroup.get('name').value);
-        console.log(this.myFormGroup.errors);
-    }
-
-    onBlur(event: any) {
-        if(this.myFormGroup.get(event.target.name).errors) {
-            // this.messageService.add(this.myFormGroup.get(event.target.name).errors.toString());
-            console.log(this.myFormGroup.get(event.target.name).errors);
-        };
-        console.log('NAME IS',this.myFormGroup.get('name').status);
+      })
+        console.log('FORM IS',this.patientForm.get('name').status);
     }
 
     ngOnChanges() {
-        console.log(this.myFormGroup);
-        this.myFormGroup.setValue({
-            name: this.name,
-            firstName: this.firstname,
-        })
+      // LET TS LINT HAPPY
+    }
+
+    onSubmit(e: any) {
+      e.preventDefault();
+      // TODO: Use EventEmitter with form value
+        this.patientForm.reset();
+        console.warn(this.patientForm.value);
+        console.log(this.patientForm.get('name').value);
+        console.log(this.patientForm.errors);
+    }
+
+    onBlur(event: any) {
+        if(this.patientForm.get(event.target.name).errors) {
+            console.log(this.patientForm.get(event.target.name).errors);
+        };
+        console.log('NAME IS',this.patientForm.get('name').status);
+    }
+
+    get name() {
+      return this.patientForm.get('name');
+    }
+    set name(arg: any) {
+      // LEAVE EMPTY
     }
 
 }

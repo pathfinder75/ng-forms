@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { Patient } from "./patient";
+import { Patient } from "../patient";
 import { Output } from '@angular/core/src/metadata/directives';
 
 @Component({
@@ -18,13 +18,13 @@ export class HeroChildComponent implements OnInit {
   @Input('master') master: string;
   @Input() id: number;
   private _name = '';
-  
+
   @Output() onClick = new EventEmitter<boolean>();
   mafunc(agreed: boolean) {
     agreed = !agreed;
     this.onClick.emit(agreed);
   }
-  
+
   @Input() // tslint: disable-line no-input-rename
   set name(name: string) {
     this._name = (name && name.trim()) || '<no name set>';
