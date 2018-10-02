@@ -1,9 +1,11 @@
-<form class="form-group" (ngSubmit)="submit($event)" [formGroup]="formGroup" novalidate>
-    <input class="form-control" type="text" name="name" formControlName="name" />
+<form class="form-group" #name="ngForm" novalidate>
+  <label for="name">Nom :</label>
+    <input name="name" [(ngModel)]="patient.name">
+    <div> TODO: Remove this {{ patient.name }} </div>
     <button class="btn btn-default" type="submit">Show hero name</button>
     <button class="btn btn-default" (click)="clear()">Clear</button>
   </form>
-  <app-hero-child *ngFor="let hero of heroes" [id]="hero.id" [name]="hero.name" [master]="hero.master" (onClick)="update($event)"></app-hero-child>
+  <app-hero-child *ngFor="let hero of heroes" [id]="hero.id" [name]="hero.name" [master]="hero.master"></app-hero-child>
 <div class="container-fluid">
   <app-message></app-message>
 </div>

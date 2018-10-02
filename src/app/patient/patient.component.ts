@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Patient } from "./hero-child/patient";
 import { HeroService } from "../services/hero.service";
 
@@ -12,9 +12,9 @@ import { HeroService } from "../services/hero.service";
   styleUrls: ['./hero.component.css']
 })
 export class PatientComponent implements OnInit {
-  public formGroup = new FormGroup({
-    name: new FormControl(),
-  });
+  public myForm: FormGroup;
+  private submitted = false;
+  public patient: Patient;
   public names = ['Mr IQ', 'Poison ivy', ' ', 'Bombastos']
   private masterN: string = "Yves";
   public heroes: Patient[];
@@ -25,7 +25,7 @@ export class PatientComponent implements OnInit {
     });
   }
   clear() {
-    this.formGroup.setValue({name: ""});
+    this.patient.name = '';
   }
   @Input() set master(name){
     this.masterN = name;
@@ -36,19 +36,22 @@ export class PatientComponent implements OnInit {
   update(response: boolean) {
     this.masterN = String(response);
   }
-  submit(event: any) {
-    event.preventDefault();
-    try {
-      this.master = this.formGroup.value.name;
-    } catch (error) {
-      console.log(error);
+  onSubmit(e: any) {
+    e.preventDefault();
+    this.submitted = true;
+    this.master = "Master";
+      console.log(this.myForm.errors);
       
     }
     
-  }
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {
+    this.myForm = new FormGroup({
+      name: new FormControl(),
+      firstName: new FormControl()
+    });
+    this.patient = new Patient(11, 'Davis', 'Yves');
     this.getHeroes();
   }
 

@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
-import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
-import upperCase from 'upper-case'; //tslint:disable-line
+import { Component, OnInit, OnChanges } from "@angular/core";
+import { MessageService } from "../services/message.service";
+import { NgForm, FormGroup, FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators }
+ from "@angular/forms";
+import { Patient } from "app/patient/hero-child/patient"
 declare var $: any;
 
 @Component({
@@ -8,60 +10,50 @@ declare var $: any;
     templateUrl: "./forms.component.html",
     styleUrls: ["./forms.component.css"]
 })
-export class FormsComponent {
-    
-    value: string = "";
+export class FormsComponent implements OnInit, OnChanges {
 
-    inputElement: HTMLInputElement
+    public firstname: FormControl;
+    public lastname: FormControl;
+    public password: FormControl;
+    public name: FormControl;
+    public age: FormControl;
+    public gender: FormControl;
+    public patient: Patient;
+    public myFormGroup: FormGroup;
+    protected submitted: Boolean;
 
-    constructor() {
-        
-    }
-    
-    update(value: string): any{
-        this.value = upperCase(value);
-    }
-
-    onKeyup(event: any){
-        
-    }
-
-    reset(e: any){
-        this.value = "";
-    }
-
-    // format any text to autocapitalize
-
-    public nomPropre(text: string){
-        return text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
-      }
-  
-    public nomCompose(nom: string){
-        let resultat = this.nomPropre(nom);
-        let separateur = new RegExp(/[\u0020-\u002F]+/g);
-        
-        if(separateur.test(resultat)){
-            let sep;
-            console.log(resultat.match(separateur));
-            
-            resultat.indexOf(" ") > 0 ? sep = " " : resultat.indexOf("-") > 0 ? sep = "-" : resultat.indexOf(".") ? sep = "." : sep = "_";
-
-            console.log(sep);
-
-            let indice = 0;
-
-            while(resultat.indexOf(sep, indice) > 0){
-
-                indice=resultat.indexOf(sep, indice);
-                resultat = resultat.substring(0, indice+1)+this.nomPropre(resultat.substring(indice+1));
-                indice++;
-
-            }
-        }
-        return resultat;
-    }
+    constructor(private messageService: MessageService) { }
     ngOnInit() {
-        // fonction qui récupère l'attribut autocapitalize de l'input field...
+        this.submitted = false;
+        this.myFormGroup = new FormGroup({
+            password: new FormControl('', Validators.required),
+            firstname: new FormControl('', Validators.required),
+            age: new FormControl('', Validators.required),
+            gender: new FormControl('', Validators.required),
+        });
+    }
+
+    onSubmit(event: any) {
+        event.preventDefault();
+        this.submitted = true;
+        console.log(this.myFormGroup.get('name').value);
+        console.log(this.myFormGroup.errors);
+    }
+
+    onBlur(event: any) {
+        if(this.myFormGroup.get(event.target.name).errors) {
+            // this.messageService.add(this.myFormGroup.get(event.target.name).errors.toString());
+            console.log(this.myFormGroup.get(event.target.name).errors);
+        };
+        console.log('NAME IS',this.myFormGroup.get('name').status);
+    }
+
+    ngOnChanges() {
+        console.log(this.myFormGroup);
+        this.myFormGroup.setValue({
+            name: this.name,
+            firstName: this.firstname,
+        })
     }
 
 }

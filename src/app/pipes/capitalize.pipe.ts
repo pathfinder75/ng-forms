@@ -12,5 +12,31 @@ export class CapitalizePipe implements PipeTransform {
     });
     return tab.join('-');
   }
+  // format any text to autocapitalize
+
+  public upperCaseFirst(text: string) {
+    return text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
+  }
+
+  public upperCaseEach(nom: string) {
+    let resultat = this.upperCaseFirst(nom);
+    let separateur = new RegExp(/[\u0020-\u002F]+/g);
+
+    if (separateur.test(resultat)) {
+      let sep;
+      console.log(resultat.match(separateur));
+
+      let indice = 0;
+
+      while (resultat.indexOf(sep, indice) > 0) {
+
+        indice = resultat.indexOf(sep, indice);
+        resultat = resultat.substring(0, indice + 1) + this.upperCaseFirst(resultat.substring(indice + 1));
+        indice++;
+
+      }
+    }
+    return resultat;
+  }
 
 }
